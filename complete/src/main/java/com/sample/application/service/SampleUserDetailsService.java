@@ -16,10 +16,15 @@ public class SampleUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        User.UserBuilder builder = User.withUsername(username)
+        User.UserBuilder builder =
+                User.withUsername(username)
                 .password(passwordEncoder.encode("password"));
-        // 一旦authoritiesとaccountLockedは設定しない
+        if (username.equals("admin")) {
+            builder.roles("USER", "ADMIN");
+        } else {
+            builder.roles("USER");
+        }
+        // authoritiesかroleに何かしら設定しないとログインできない？上記に加えてWebSecurityConfigにhasRole設定をすることで動作した
 
         return builder.build();
     }

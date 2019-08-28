@@ -1,11 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Login</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="fragment/layout :: head(~{::title})">
+  <title>ログイン</title>
 </head>
 <body>
 
-Login Page
+<section class="section hero">
+  <div class="container">
+<!--    ログイン失敗時にSpringSecurityはログインページ?error=trueに飛ばすため、エラー時の表示を画面のみで制御することができる-->
+    <article class="message is-danger" th:if="${param.error}">
+      <div class="message-header">
+        <p>ログイン失敗</p>
+        <button class="delete" aria-label="delete"></button>
+      </div>
+      <div class="message-body">
+        Login Error.
+      </div>
+    </article>
+
+    <form th:action="@{/login}" method="post">
+      <labe class="label">User Name</labe>
+      <div class="field">
+        <div class="control">
+<!--          name="username"でない場合はWebSecurityConfigにパラメータ設定要-->
+          <input type="text" class="input is-large" name="username">
+        </div>
+      </div>
+      <labe class="label">Password</labe>
+      <div class="field">
+        <div class="control">
+<!--          name="password"でない場合はWebSecurityConfigにパラメータ設定要-->
+          <input type="password" class="input is-large" name="password">
+        </div>
+      </div>
+      <div>
+        <input type="submit" class="button is-primary is-large" value="Sign In">
+      </div>
+    </form>
+  </div>
+</section>
 </body>
 </html>
