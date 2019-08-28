@@ -1,11 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Login</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="fragment/layout :: head(~{::title})">
+  <title>ログイン</title>
 </head>
 <body>
 
-Login Page
+<section class="section hero">
+  <div class="container">
+    <form th:action="@{/login}" method="post">
+      <labe class="label">User Name</labe>
+      <div class="field">
+        <div class="control">
+          <input type="text" class="input is-large" name="username">
+        </div>
+      </div>
+      <labe class="label">Password</labe>
+      <div class="field">
+        <div class="control">
+          <input type="password" class="input is-large" name="password">
+        </div>
+      </div>
+      <div>
+        <input type="submit" class="button is-primary is-large" value="Sign In">
+      </div>
+    </form>
+  </div>
+</section>
 </body>
 </html>
