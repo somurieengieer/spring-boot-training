@@ -8,6 +8,7 @@
 
 <section class="section hero">
   <div class="container">
+<!--    ログイン失敗時にSpringSecurityはログインページ?error=trueに飛ばすため、エラー時の表示を画面のみで制御することができる-->
     <article class="message is-danger" th:if="${param.error}">
       <div class="message-header">
         <p>ログイン失敗</p>
