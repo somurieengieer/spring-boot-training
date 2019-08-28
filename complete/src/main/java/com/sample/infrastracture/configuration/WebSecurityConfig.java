@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests() // 認可の設定を定義する
-                .antMatchers("/admin/**").hasAuthority("ADMIN") // ADMINロールのみ/admin/**のURLが有効
+                .antMatchers("/admin/**").hasRole("ADMIN") // ADMINロールのみ/admin/**のURLが有効
                 // anyRequest()は認可設定の最後に書く。先に.anyRequest().authenticated()を書くと認可制限が効かずどこでもアクセスできてしまうので注意
                 .anyRequest() // 全てのリクエストは
                 .authenticated() // 認証が必要
