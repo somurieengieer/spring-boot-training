@@ -18,6 +18,15 @@
         Login Error.
       </div>
     </article>
+    <article class="message is-info" th:if="${param.logout}">
+      <div class="message-header">
+        <p>ログアウト</p>
+        <button class="delete" aria-label="delete"></button>
+      </div>
+      <div class="message-body">
+        Logout.
+      </div>
+    </article>
 
     <form th:action="@{/login}" method="post">
       <labe class="label">User Name</labe>

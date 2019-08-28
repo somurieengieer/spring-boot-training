@@ -13,6 +13,9 @@
 
 <div class="section">
   <a th:href="@{/admin}">adminトップページ</a>
+  <a href="#" onclick="document.getElementById('logoutForm').submit();">ログアウト</a>
+  <form id="logoutForm" th:action="@{/logout}" method="post">
+  </form>
 </div>
 </body>
 </html>

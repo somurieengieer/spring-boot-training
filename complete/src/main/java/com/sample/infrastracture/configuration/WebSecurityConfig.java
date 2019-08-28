@@ -42,7 +42,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login") // ログインページのURL
 //                .usernameParameter("username3") // ログインformのユーザー名がusername以外の場合は設定が必要
 //                .passwordParameter("pass_field") // ログインformのパスワードのnameがpassword以外の場合は設定が必要
-                .permitAll(); // ログインページへのアクセス権限を全員に付与
+                .permitAll() // ログインページへのアクセス権限を全員に付与
+                .and()
+            .logout()
+//                .logoutSuccessUrl("/login?logoutSuccess") // デフォルトでは/login?logoutに遷移する。変更したい場合は先の通りに設定する
+                .permitAll();
     }
 
     @Bean
