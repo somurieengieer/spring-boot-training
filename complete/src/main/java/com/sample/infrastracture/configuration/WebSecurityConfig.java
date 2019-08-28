@@ -38,6 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
             .formLogin() // ログインページの設定を定義する
                 .loginPage("/login") // ログインページのURL
+//                .usernameParameter("username3") // ログインformのユーザー名がusername以外の場合は設定が必要
+//                .passwordParameter("pass_field") // ログインformのパスワードのnameがpassword以外の場合は設定が必要
                 .permitAll(); // ログインページへのアクセス権限を全員に付与
     }
 
