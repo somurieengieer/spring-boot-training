@@ -21,20 +21,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // 自前のuserDetailsServiceを使用するために当メソッドをオーバーライドする。
+        // ログイン画面で入力されたユーザー名・パスワードは以下処理に渡される。
+        // 今回の場合、BCryptでエンコードされた後にuserDetailsServiceのloadUserByUserNameの返り値と照合される
         auth.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+            .authorizeRequests()
+                .anyRequest()
+                .authenticated()
+                .and()
             .formLogin()
                 .loginPage("/login")
-                .permitAll()
-                .and()
-            .authorizeRequests()
-                .antMatchers("/**")
-                .authenticated();
+                .successForwardUrl("/")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .permitAll();
     }
 
     @Bean
