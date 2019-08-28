@@ -26,6 +26,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
+    // Gradle3.4からcompileは非推奨。implementationとapiで代替する。
     compile("org.springframework.boot:spring-boot-starter-web")
     // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")
@@ -33,5 +34,10 @@ dependencies {
     // tag::tests[]
     testCompile("org.springframework.boot:spring-boot-starter-test")
     // end::tests[]
+
+    // SpringSecurityの設定。spring-boot-starter〜で必要なライブラリの依存関係を解決できる
+    // バージョンは親pomのspring-boot-starter-parentに定義されているものに準ずるため記載は不要
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
 }
 
