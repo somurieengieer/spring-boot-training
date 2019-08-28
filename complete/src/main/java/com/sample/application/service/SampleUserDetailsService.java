@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +19,9 @@ public class SampleUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User.UserBuilder builder = User.withUsername(username)
-                .password(new BCryptPasswordEncoder().encode("password"))
-                .authorities(AuthorityUtils.createAuthorityList("ROLE_USER"));
-        // authoritiesは何かしら設定しないとログインできない
+                .password(passwordEncoder.encode("password"))
+                .authorities(AuthorityUtils.createAuthorityList("ADMIN_USER"));
+        // authoritiesは何かしら設定しないとログインできないので注意
 
         return builder.build();
     }

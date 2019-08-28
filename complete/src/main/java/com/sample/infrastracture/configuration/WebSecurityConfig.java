@@ -24,28 +24,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // ログイン画面で入力されたユーザー名・パスワードは以下処理に渡される。
         // 今回の場合、BCryptでエンコードされた後にuserDetailsServiceのloadUserByUserNameの返り値と照合される
         auth.userDetailsService(userDetailsService)
-                .passwordEncoder(new BCryptPasswordEncoder());
+                .passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
-                .anyRequest()
-                .authenticated()
-                .and()
-            .formLogin()
-                .loginPage("/login")
-                .successForwardUrl("/")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .permitAll();
+            .authorizeRequests() // 認可の設定を定義する
+                .anyRequest() // 全てのリクエストは
+                .authenticated() // 認証が必要
+
+                .and() // 設定を続ける場合は.and()でbuilderパターン形式で実装が可能
+
+            .formLogin() // ログインページの設定を定義する
+                .loginPage("/login") // ログインページのURL
+                .permitAll(); // ログインページへのアクセス権限を全員に付与
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         // パスワードをハッシュ化するアルゴリズムをBeanとして一元管理する。
         // 特に要件がない場合はBCryptPasswordEncoderが無難。（他にはSHA-256アルゴリズムの選択肢などがある）
+        // BCryptは16バイトの乱数をソルトとして使用し、2^10回ストレッチングを行う。
         return new BCryptPasswordEncoder();
     }
 }
