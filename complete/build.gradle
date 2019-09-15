@@ -39,5 +39,10 @@ dependencies {
     // バージョンは親pomのspring-boot-starter-parentに定義されているものに準ずるため記載は不要
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+
+    // H2DBを使用する。設定はapplication.propertiesに記載する。ファイルの置き場所は右記を参照。https://qiita.com/kazuki43zoo/items/0ce92fce6d6f3b7bf8eb
+    // IntelliJでH2のインメモリDBを使用時に、SQLの補完を使うには　-> Databaseツールウィンドウ->DDL Data Source->schema.sqlを選択する
+    runtimeOnly "com.h2database:h2"
+    compile 'org.springframework:spring-jdbc'
 }
 

@@ -1,0 +1,23 @@
+DROP SCHEMA IF EXISTS ユーザー CASCADE;
+CREATE SCHEMA ユーザー;
+
+CREATE TABLE ユーザー.アカウント (
+    ユーザーID VARCHAR(20) PRIMARY KEY,
+    役割       VARCHAR(20) NOT NULL,
+    登録日時   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE ユーザー.パスワード履歴 (
+    パスワード履歴番号 UUID PRIMARY KEY,
+    ユーザーID VARCHAR(20) NOT NULL,
+    パスワード VARCHAR(256) NOT NULL,
+    登録日時   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ユーザーID) REFERENCES ユーザー.アカウント(ユーザーID)
+);
+
+CREATE TABLE ユーザー.パスワード (
+    ユーザーID        VARCHAR(20) PRIMARY KEY,
+    パスワード履歴番号 UUID NOT NULL,
+    登録日時          TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (パスワード履歴番号) REFERENCES ユーザー.パスワード履歴(パスワード履歴番号)
+);

@@ -1,0 +1,15 @@
+spring:
+  # DB設定
+  datasource:
+    # jdbc:h2:mem　オンメモリでH2を起動することを宣言
+    # DB_CLOSE_DELAY=-1　コネクション切断時にデータをドロップしないように設定
+    # MODE=PostgreSQL　PostgreSQLモードで起動する
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL
+#    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+#    driverClassName: org.h2.Driver   # デフォルト設定
+#    username: sa                     # デフォルト設定
+#    password:                        # デフォルト設定
+  # H2のコンソール画面を見れるようにする。URLは右記のフォーマット。　http://localhost:8080/h2-console
+  h2:
+    console:
+      enabled: true
